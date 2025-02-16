@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Estimador Pruebas Físicas</title>
+</head>
+<body>
+<nav></nav>
+
+    <div id="contenido">
+    <h1 id="titulo"> Estimador de Pruebas Físicas</h1>
+        <hr>
+        <div id="datos">
+            <h3>Datos</h3>
+            <section>
+                <label for="">Edad</label>
+                <select id="edad" name="edad" onchange ="edad()">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value="" id=""></option>
+                  </select>
+            
+                <label for="">Genero</label>
+                
+                    <select name="genero" id="genero" onchange="generocolor()" >
+                        <option value=""></option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                
+            </section>
+        </div>
+
+        <div id="contextura"> 
+            <hr>
+            <section><h4>Contextura</h4></section>
+            <section>
+                <label for="">Peso</label>
+                <select id="peso" name="peso">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+
+                <label for="">Altura</label>
+                <select id="altura" name="altura" onchange="imc()">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                <label for="">Cintura</label>
+                <select id="cintura" >
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                  
+                  <section id="idimc">
+                        <label for="imc" id="imc">IMC</label>
+                        <label name="" id="imc1" style="background-color: white;"></label>
+                </section>
+
+            </section>
+
+        </div>
+        <hr>
+       
+
+        <div id="fuerza">
+            <h4 id="subfuerza">Pruebas Individuales</h4>
+            <section id="">
+                <label for="brazos" name="lblbrazos" id="lblbrazos">Flexiones de Brazos</label>
+                <select id="selectbrazos" onchange ="brazos()">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                <input class="ptos"  type="text" name="brazos" id="ptsbrazos" onkeydown="return false" disabled ="true" placeholder="Ptos.">
+            </section>
+            <section>
+                <label for="abd">Abdominales</label>
+                <select id="selectabd" onchange="abd()">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                  <input class="ptos"  type="text" name="brazos" id="ptsabd" onkeydown="return false" disabled ="true" placeholder="Ptos.">
+                
+            </section>
+            <section>
+                <label for="">Barras</label>
+                <select id="selectbarra" onchange="barra()" >
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                <input class="ptos" type="text" name="barras" id="ptsbarra"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+                
+            </section>
+
+            <section>
+            <label for="Cabo">Cabo</label>
+
+                <select name="cabo" id="selectcabo" onchange="cabo()">
+                    <option value=""></option>
+                    <option value="0">SI</option>
+                    <option value= -10 >NO</option>
+                </select>
+                <input class="ptos" type="number" name="cabo" id="ptscabo"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+
+            </section>
+            
+            <section id="">
+                <label for="carrera">2400 Mts.</label>
+                <select id="tiempo" onchange="carrera()">
+                    <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>
+                  </select>
+                <input class="ptos"  type="number" name="" id="ptoscarrera"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+                
+            </section>
+
+            <section>
+                <label for="pierna">Elev. Pierna</label>
+    
+                    <select name="pierna" id="selectpierna" onchange="pierna()">
+                        <!-- Aquí se generará la lista de números -->
+                     <option value=""></option>n>
+                    </select>
+                    <input class="ptos" type="number" name="pierna" id="ptspierna"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+    
+                </section>
+
+
+
+    </div>
+
+    <div id="fuerza">
+        <label id="subfuerza"> Sub-dimesión Fuerza</label>
+        <input class="ptos" type="number" name="fuerzaF" id="fuerzaF"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+    </div>
+
+    <div id="fuerza">
+        <label id="subfuerza"> Sub-dimesión Resistencia</label>
+        <input class="ptos" type="number" name="carreraF" id="carreraF"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+    </div>
+
+    <div id="fuerza">
+        <label id="subfuerza"> Sub-dimesión Pierna recta</label>
+        <input class="ptos" type="number" name="piernaF" id="piernaF"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+    </div>
+
+    <div id="fuerza">
+        <label id="subfuerza"> Sub-dimesión Fuerza aplicada</label>
+        <input class="ptos" type="number" name="caboF" id="caboF"  onkeydown="return false" disabled ="true" placeholder="Ptos.">
+    </div>
+    <div>
+        <h3 id="resultado"></h3>
+
+    </div>
+    <div id="divboton">
+        <button class="btn btn-primary" id="boton" name="boton" onclick="calcular()">CALCULAR</button>
+        <button class="btn btn-secondary" id="boton" name="boton">LIMPIAR</button>
+
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <footer> By F. Pel@ez</footer>
+</body>
+</html>
