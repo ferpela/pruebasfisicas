@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimador Pruebas Físicas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74b9ff, #9fcaeb);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .title-box {
+      margin-top: 50px;
+      background: linear-gradient(135deg, #811b1b, #a32c56);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: all 0.4s ease;
+      margin-bottom: 20px;
+    }
+
+    .title-box:hover {
+      background: linear-gradient(135deg, #3945eb, #2231b8);
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .btn-box {
+      width: 400px;
+      height: 300px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-decoration: none;
+      color: #2d3436;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      margin-right: 50px;
+      
+    }
+
+    .btn-box:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #3945eb, #2231b8);
+      color: #d4d4d4;
+
+
+    }
+
+    .btn-secondary{
+      background-color: grey;
+      padding: 20px;
+      margin-top: 50px;
+      border-radius: 40px;
+      width: 400px  ;
+      font-size: x-large;
+      font-weight: bold;
+      
+    }
+
+    /* Responsivo */
+    @media (max-width: 650px) {
+      .title-box {
+        font-size: 1.8rem;
+        padding: 15px 25px;
+        margin-top: 250px;
+        margin-bottom: 50px;
+      }
+      .btn-box {
+        width: 100%;
+        height: 200px;
+        margin-top: 200px;
+        font-style: italic;
+        font-family:Arial, Helvetica, sans-serif;
+        margin: auto;
+      }
+         .btn-secondary{
+      background-color: grey;
+      padding: 20px;
+      margin-top: 50px;
+      border-radius: 40px;
+      width: 200px  ;
+      font-size: large;
+      font-weight: bold;
+
+    }
+
+    .container {
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    }
+  </style>
+</head>
+<body>
+  <div class="title-box">Estimador de Pruebas Físicas</div>
+
+
+
+
+    
+  <div class="container">
+    <a href="actual.html" class="btn-box">Sistema Nuevo</a>
+    <a href="anterior.html" class="btn-box">Sistema Viejo</a>
+  </div>
+
+    <style>
+body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#eef2f3;margin:0}
+#app{background:#fff;padding:20px;border-radius:16px;box-shadow:0 4px 10px rgba(0,0,0,.2);text-align:center;max-width:320px;width:100%}
+.day{margin:10px 0;padding:8px;border-radius:10px;background:#f7f7f7}
+h2{margin:0 0 10px}
+</style>
+</head>
+<body>
+<div id="app">
+  <h2>Buenos Aires</h2>
+  <div id="weather">Cargando...</div>
+</div>
+<script>
+const w=document.getElementById("weather");
+const lat=-34.61,lon=-58.38;
+const icons={0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌦️",61:"🌧️",71:"❄️",95:"⛈️"};
+async function getWeather(){
+  let r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`);
+  let d=await r.json(),c=d.current_weather;
+  let dates=d.daily.time,maxs=d.daily.temperature_2m_max,mins=d.daily.temperature_2m_min,codes=d.daily.weathercode;
+  let html="";
+  dates.slice(0,3).forEach((date,i)=>{
+    let f=new Date(date).toLocaleDateString("es-AR",{weekday:"short",day:"numeric",month:"short"});
+    let icon=icons[codes[i]]||"🌍";
+    html+=`<div class="day"><b>${f}</b><br>${icon}<br>Mín: ${mins[i]}°C - Máx: ${maxs[i]}°C${i==0?`<br>Actual: ${c.temperature}°C<br>Viento: ${c.windspeed} km/h`:""}</div>`;
+  });
+  w.innerHTML=html;
+}
+getWeather();
+</script>
+
+
+    <footer class="btn btn-secondary"> Copy © - By FP@</footer>
+</body>
+</html>
+
+
+
+<!-- 
+  <div class="container">
+    <a href="#" class="btn-box">Sistema Anterior</a>
+    <a href="#" class="btn-box">Sistema Actual</a>
+  </div>
+</body>
+</html> -->

@@ -1,0 +1,262 @@
+
+footer{
+    text-align: center;
+    margin-top: 20px;
+}
+
+h1{
+    margin-top: 15px;
+    padding-top: 25px;
+}
+nav{
+    margin-bottom: 20px;
+}
+
+#resultado{
+    text-align: center;
+    width: 50%;   
+    margin: auto;
+    margin-top: 20px;
+    font-size:xx-large;
+
+}
+/* Pantallas grandes (desktop) */
+@media only screen and (min-width: 1025px) {
+    /* Estilos para pantallas grandes */
+    body {
+        padding-top: 25px;
+        
+        font-size: 20px;
+      
+    }
+  
+  
+
+
+#contenido{
+    margin-top: 50px;
+    width: 50%;
+    border: solid;
+    margin: auto;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-right: 50px;
+}
+
+#datos * {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    
+    
+}
+
+#genero{
+    width: 120px;
+    text-align: center;
+
+}
+#edad{
+    width: 80px;
+    text-align: center;
+}
+
+#fuerza{
+    text-align: right;
+    padding: 25px;
+    border: solid;
+    width: 70%;
+    margin: auto;
+    align-items: center;
+
+    
+}
+
+#subfuerza{
+    text-align: center;
+    margin: auto;
+}
+
+#ptosbrazos{
+    width: 35px;
+    height: 25px;
+    border: solid;
+    
+}
+#fbrazos, #abd,#barras,#pierna,#carrera,#cabo,#selectcabo,#selectpierna,#selectbarra,#tiempo,#selectbrazos,#selectabd{
+text-align: center;
+margin-left: 15px;
+
+margin-top: 25px;
+
+}
+#selectpierna,#selectcabo,#selectbarra,#tiempo,#selectbrazos,#selectabd{
+    width: 70px;
+}
+
+#imc1{
+    width: 70px;
+    text-align: center;
+    border: solid, 1px;
+    border-color: dimgray;
+    
+    
+
+}
+
+
+#contextura * {
+    text-align: center;
+    margin-right: 15px;
+}
+
+.ptos{
+    width: 70px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#divboton{
+    margin: auto;
+   
+    text-align: center;
+}
+#boton{
+    width: 120px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+#idimc{
+    margin-top: 20px;
+    
+}  
+
+#ptsbrazos{
+    text-align: center;
+    width: 70px;
+}
+
+}
+/* Pantallas pequeñas (móviles) */
+@media only screen and (max-width: 768px) {
+    /* Estilos para pantallas pequeñas */
+    body {
+      font-size: 16px;
+      padding-top: 25px;
+    }
+
+    #contenido{
+        margin-top: 50px;
+        text-align: center;
+        border: solid;
+        margin: auto;
+        
+    }
+    
+    #datos * {
+        
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        
+        
+    }
+    
+   
+    #genero{
+        width: 120px;
+        text-align: center;
+    
+    }
+    #edad{
+        width: 80px;
+        text-align: center;
+    }
+    
+    #fuerza{
+        text-align: right;
+        padding: 25px;
+        border: solid;
+        width: 90%;
+        margin: auto;
+        align-items: center;
+    
+        
+    }
+    
+    #subfuerza{
+        text-align: center;
+        margin: auto;
+        margin-left: 0;
+    }
+    
+    #ptosbrazos{
+        width: 35px;
+        height: 25px;
+        border: solid;
+        
+    }
+    #fbrazos, #abd,#barras,#pierna,#carrera,#cabo,#selectcabo,#selectpierna,#selectbarra,#tiempo,#selectbrazos,#selectabd{
+    text-align: center;
+    margin-left: 15px;
+    margin-top: 25px;
+    align-content: center;
+    
+    }
+    #selectpierna,#selectcabo,#selectbarra,#tiempo,#selectbrazos,#selectabd{
+        width: 64px;
+        height: 30px;
+    }
+    
+    #imc1{
+        width: 70px;
+        text-align: center;
+        border: solid, 1px;
+        border-color: dimgray;
+    }
+    
+    #idimc{
+        margin-top: 20px;
+    }    
+    #contextura * {
+        text-align: center;
+        margin-right: 15px;
+    }
+    
+    .ptos{
+        width: 70px;
+        margin-left: 10px;
+    }
+    
+    #divboton{
+        margin: auto;
+       
+        text-align: center;
+    }
+    #boton{
+        width: 120px;
+        margin-top: 20px;
+        margin-right: 15px;
+    }
+    
+
+
+
+  }
+  
+  /* Pantallas medianas (tabletas) */
+  @media only screen and (min-width: 600px) and (max-width: 1024px) {
+    /* Estilos para pantallas medianas */
+    body {
+      font-size: 18px;
+      width: 90%;
+    }
+
+    
+}
+  
+  
+  

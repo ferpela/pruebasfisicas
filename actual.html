@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimador Pruebas Físicas</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h1, h3, h4 {
+      font-weight: 600;
+    }
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      background: #0d6efd;
+      color: #fff;
+      border-radius: .5rem .5rem 0 0;
+    }
+    .ptos {
+      max-width: 120px;
+      text-align: center;
+    }
+     h4{
+      color: rgb(239, 239, 240) !important;
+      background-color: rgb(21, 43, 243);
+      width: 300px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 40px;
+      font-weight: bold;
+      
+    }
+
+     #resultado{
+      width: 400px;
+      color: rgb(239, 239, 240) !important;
+      border-radius: 40px;
+      margin: auto;
+      padding: 30px;
+     } 
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">INICIO</a>
+    </div>
+  </nav>
+
+  <!-- Contenido -->
+  <div class="container py-5">
+
+    <div class="text-center mb-4">
+      <h1 class="mb-2">Estimador de Pruebas Físicas</h1>
+      <h4 >Sistema Nuevo</h4>
+    </div>
+
+    <!-- Datos -->
+    <div class="card p-4 mb-4">
+      <h3 class="mb-3">Datos</h3>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Edad</label>
+          <select id="edad" class="form-select" onchange="edad()">
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Género</label>
+          <select id="genero" class="form-select" onchange="generocolor()">
+            <option value=""></option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contextura -->
+    <div class="card p-4 mb-4">
+      <h3 class="mb-3">Contextura</h3>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Peso</label>
+          <select id="peso" class="form-select">
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Altura</label>
+          <select id="altura" class="form-select" onchange="imc()">
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Cintura</label>
+          <select id="cintura" class="form-select">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3 text-center">
+        <label class="fw-semibold">IMC:</label>
+        <span id="imc1" class="badge bg-light text-dark px-3 py-2">---</span>
+      </div>
+    </div>
+
+    <!-- Pruebas Individuales -->
+    <div class="card p-4 mb-4">
+      <h3 class="mb-3">Pruebas Individuales</h3>
+
+      <div class="row g-3">
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Flexiones de Brazos</label>
+            <select id="selectbrazos" class="form-select" onchange="brazos()">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="text" id="ptsbrazos" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Abdominales</label>
+            <select id="selectabd" class="form-select" onchange="abd()">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="text" id="ptsabd" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Barras</label>
+            <select id="selectbarra" class="form-select" onchange="barra()">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="text" id="ptsbarra" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Cabo</label>
+            <select id="selectcabo" class="form-select" onchange="cabo()">
+              <option value=""></option>
+              <option value="0">SI</option>
+              <option value="-10">NO</option>
+            </select>
+          </div>
+          <input type="text" id="ptscabo" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Carrera 2400 Mts.</label>
+            <select id="tiempo" class="form-select" onchange="carrera()">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="text" id="ptoscarrera" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="flex-fill">
+            <label class="form-label">Elev. Pierna</label>
+            <select id="selectpierna" class="form-select" onchange="pierna()">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="text" id="ptspierna" class="form-control ms-2 ptos" placeholder="Ptos." disabled>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-dimensiones -->
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <label class="fw-semibold">Sub-dimensión Fuerza</label>
+          <input type="text" id="fuerzaF" class="form-control text-center mt-2" placeholder="Ptos." disabled>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <label class="fw-semibold">Sub-dimensión Resistencia</label>
+          <input type="text" id="carreraF" class="form-control text-center mt-2" placeholder="Ptos." disabled>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <label class="fw-semibold">Sub-dimensión Pierna Recta</label>
+          <input type="text" id="piernaF" class="form-control text-center mt-2" placeholder="Ptos." disabled>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <label class="fw-semibold">Sub-dimensión Fuerza Aplicada</label>
+          <input type="text" id="caboF" class="form-control text-center mt-2" placeholder="Ptos." disabled>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resultado -->
+    <div class="text-center mt-4">
+      <h3 id="resultado" class="fw-bold text-primary"></h3>
+    </div>
+
+    <!-- Botones -->
+    <div class="text-center mt-4">
+      <button class="btn btn-lg btn-primary me-2" onclick="calcular()">Calcular</button>
+      <button class="btn btn-lg btn-outline-secondary">Limpiar</button>
+    </div>
+
+  </div>
+
+  <footer>
+    Copy © - By FP@
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

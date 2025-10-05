@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Evaluación del servicio — Caritas</title>
+<style>
+  :root{
+    --bg: #0f1724;
+    --card-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    --glass: rgba(255,255,255,0.04);
+    --accent: linear-gradient(90deg,#6ee7b7,#3b82f6);
+    --radius: 14px;
+    --gap: 18px;
+    --transition: 230ms cubic-bezier(.2,.9,.3,1);
+  }
+
+  /* Page layout */
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    padding:32px;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1000px 500px at 10% 10%, rgba(59,130,246,0.06), transparent),
+                radial-gradient(800px 400px at 90% 90%, rgba(99,102,241,0.04), transparent),
+                var(--bg);
+    color:#e6eef8;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .survey-wrap{
+    width:100%;
+    max-width:880px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:18px;
+    padding:26px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .survey-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .survey-title{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    background: var(--accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .survey-sub{
+    font-size:13px;
+    color: #bcd3f0;
+    opacity:.9;
+  }
+
+  /* Faces grid */
+  .faces{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: var(--gap);
+    align-items:center;
+    justify-items:center;
+    padding:10px 6px 18px;
+  }
+
+  /* Each face card */
+  .face{
+    width:100%;
+    max-width:240px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    border: 1px solid transparent;
+    user-select:none;
+    outline: none;
+  }
+  .face:focus,
+  .face:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 30px rgba(3,7,18,0.45);
+  }
+
+  .face .emoji-wrap{
+    width:110px;
+    height:110px;
+    border-radius: 999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    box-shadow: inset 0 -6px 18px rgba(255,255,255,0.03);
+    transition: transform var(--transition);
+  }
+
+  .label{
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.01em;
+    color: white;
+  }
+  .desc{
+    font-size:13px;
+    color:#9fb7df;
+    text-align:center;
+    max-width:90%;
+  }
+
+  /* Colors for faces */
+  .face[data-value="bad"] .emoji-wrap{
+    background: linear-gradient(135deg,#ff7a7a,#ff3b3b);
+    color:#fff;
+  }
+  .face[data-value="neutral"] .emoji-wrap{
+    background: linear-gradient(135deg,#ffe08a,#ffd24a);
+    color:#2b2b2b;
+  }
+  .face[data-value="good"] .emoji-wrap{
+    background: linear-gradient(135deg,#7ef2b2,#2dd4bf);
+    color:#05343a;
+  }
+
+  /* Selected state */
+  .face.selected{
+    border: 1px solid rgba(255,255,255,0.09);
+    box-shadow: 0 20px 40px rgba(2,6,35,0.6), 0 0 0 6px rgba(99,102,241,0.055);
+  }
+  .face.selected .emoji-wrap{
+    transform: scale(1.06) rotate(-4deg);
+  }
+
+  /* small labels under faces */
+  .face-meta{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:999px;box-shadow: 0 3px 8px rgba(2,6,23,0.45);
+  }
+  .dot.bad{ background: #ff4d4d; }
+  .dot.neutral{ background: #ffd166; }
+  .dot.good{ background: #34d399; }
+
+  /* footer actions */
+  .actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:14px;
+    gap:12px;
+  }
+  .note{ font-size:13px;color:#9fb7df }
+  .btn{
+    background: linear-gradient(90deg,#5eead4,#60a5fa);
+    border: none;
+    padding:10px 16px;
+    border-radius:12px;
+    color:#052f3a;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .btn:active{ transform: translateY(2px); }
+  .btn.secondary{
+    background: transparent;
+    color:#cfe7ff;
+    border:1px solid rgba(255,255,255,0.04);
+    font-weight:600;
+  }
+
+  /* Responsive */
+  @media (max-width:720px){
+    .faces{ grid-template-columns: 1fr; }
+    .survey-wrap{ padding:18px; }
+  }
+
+  /* Hidden radio inputs for keyboard form integration (visually hidden) */
+  .visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; border: 0; padding: 0; margin: -1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="survey-wrap" role="region" aria-labelledby="surveyTitle">
+  <div class="survey-head">
+    <div>
+      <div id="surveyTitle" class="survey-title">¿Cómo fue tu experiencia?</div>
+      <div class="survey-sub">Selecciona una cara para valorar la calidad de la gestión.</div>
+    </div>
+  </div>
+
+  <form id="ratingForm" class="rating-form" aria-describedby="surveyDesc">
+    <div id="surveyDesc" class="visually-hidden">Tres opciones: mala, neutral, buena.</div>
+
+    <!-- hidden radios (helpful for forms / a11y) -->
+    <input class="visually-hidden" type="radio" name="rating" id="rating-bad" value="bad" />
+    <input class="visually-hidden" type="radio" name="rating" id="rating-neutral" value="neutral" />
+    <input class="visually-hidden" type="radio" name="rating" id="rating-good" value="good" />
+
+    <div class="faces" role="list" aria-label="Opciones de valoración">
+      <!-- Bad -->
+      <button type="button" class="face" role="listitem" data-value="bad" aria-pressed="false" tabindex="0">
+        <div class="emoji-wrap" aria-hidden="true">😞</div>
+        <div class="label">Mala</div>
+        <div class="desc">No cumplió mis expectativas.</div>
+        <div class="face-meta"><div class="dot bad" aria-hidden="true"></div><div class="desc" style="font-size:12px;">Puntaje bajo</div></div>
+      </button>
+
+      <!-- Neutral -->
+      <button type="button" class="face" role="listitem" data-value="neutral" aria-pressed="false" tabindex="0">
+        <div class="emoji-wrap" aria-hidden="true">😐</div>
+        <div class="label">Regular</div>
+        <div class="desc">Estuvo bien, pero puede mejorar.</div>
+        <div class="face-meta"><div class="dot neutral" aria-hidden="true"></div><div class="desc" style="font-size:12px;">Puntaje medio</div></div>
+      </button>
+
+      <!-- Good -->
+      <button type="button" class="face" role="listitem" data-value="good" aria-pressed="false" tabindex="0">
+        <div class="emoji-wrap" aria-hidden="true">😊</div>
+        <div class="label">Excelente</div>
+        <div class="desc">Muy conforme con el servicio.</div>
+        <div class="face-meta"><div class="dot good" aria-hidden="true"></div><div class="desc" style="font-size:12px;">Puntaje alto</div></div>
+      </button>
+    </div>
+
+    <div class="actions">
+      <div style="display:flex;gap:10px; margin: auto;">
+        <button class="btn secondary" type="button" id="clearBtn">Limpiar</button>
+        <button class="btn" type="submit">Enviar</button>
+      </div>
+    </div>
+
+    <!-- For demonstration: a hidden input that will contain the chosen value -->
+    <input type="hidden" name="ratingValue" id="ratingValue" value="">
+  </form>
+</div>
+
+<script>
+  (function(){
+    const form = document.getElementById('ratingForm');
+    const faces = Array.from(document.querySelectorAll('.face'));
+    const hiddenRadios = {
+      bad: document.getElementById('rating-bad'),
+      neutral: document.getElementById('rating-neutral'),
+      good: document.getElementById('rating-good')
+    };
+    const hiddenInput = document.getElementById('ratingValue');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function selectValue(val){
+      faces.forEach(f=>{
+        const is = f.dataset.value === val;
+        f.classList.toggle('selected', is);
+        f.setAttribute('aria-pressed', is ? 'true' : 'false');
+      });
+      // check the corresponding hidden radio for form compatibility
+      if (hiddenRadios[val]) hiddenRadios[val].checked = true;
+      hiddenInput.value = val || '';
+    }
+
+    // Click / keyboard handling
+    faces.forEach(face=>{
+      face.addEventListener('click', ()=> selectValue(face.dataset.value) );
+      face.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          selectValue(face.dataset.value);
+        }
+      });
+    });
+
+    clearBtn.addEventListener('click', ()=>{
+      // clear selection
+      faces.forEach(f=>{ f.classList.remove('selected'); f.setAttribute('aria-pressed','false') });
+      Object.values(hiddenRadios).forEach(r=> r.checked = false);
+      hiddenInput.value = '';
+    });
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const v = hiddenInput.value;
+      if (!v){
+        // Simple user feedback: highlight shaking the grid
+        const container = document.querySelector('.faces');
+        container.animate([
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-8px)' },
+          { transform: 'translateX(8px)' },
+          { transform: 'translateX(0)' }
+        ], { duration: 360, easing: 'cubic-bezier(.2,.9,.3,1)' });
+        return alert('Por favor, selecciona una opción para valorar el servicio.');
+      }
+      // Aquí normalmente enviarías datos por fetch o form.submit()
+      alert('Gracias — valor seleccionado: ' + v);
+      // demo: dejarlo guardado visualmente
+    });
+  })();
+</script>
+</body>
+</html>
