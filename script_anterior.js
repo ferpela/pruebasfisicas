@@ -181,3 +181,72 @@ function generocolor(){
   else document.body.style.background = "white";
   edad();
 }
+
+
+function calcular() {
+  // Tomamos valores
+  let ptsbrazos = parseInt(document.getElementById("ptsbrazos").value) || 0;
+  let ptsabd = parseInt(document.getElementById("ptsabd").value) || 0;
+  let ptscarrera = parseInt(document.getElementById("ptoscarrera").value) || 0;
+
+  // Función para pintar inputs
+  function pintarInput(id, valor) {
+    let input = document.getElementById(id);
+    if (valor < 52) {
+      input.style.backgroundColor = "rgba(255,0,0,0.2)"; // rojo suave
+    } else {
+      input.style.backgroundColor = "rgba(0,255,0,0.2)"; // verde suave
+    }
+  }
+
+  // Aplicamos a cada uno
+  pintarInput("ptsbrazos", ptsbrazos);
+  pintarInput("ptsabd", ptsabd);
+  pintarInput("ptoscarrera", ptscarrera);
+
+  // Calculo promedio
+  let Afgt = ((ptsbrazos + ptsabd + ptscarrera) / 3).toFixed(0);
+
+  // Verificamos cuántos son < 52
+  let desaprobados = 0;
+  if (ptsbrazos < 52) desaprobados++;
+  if (ptsabd < 52) desaprobados++;
+  if (ptoscarrera < 52) desaprobados++;
+
+  // Mostramos en div
+  let resultadoDiv = document.getElementById("resultado");
+
+  if (desaprobados >= 2 || Afgt <= 51) {
+    resultadoDiv.innerText = "DESAPROBADO - AFGT: " + Afgt;
+    resultadoDiv.style.backgroundColor = "rgba(255,0,0,0.2)";
+    resultadoDiv.style.color = "red";
+  } else {
+    resultadoDiv.innerText = "APROBADO - AFGT: " + Afgt;
+    resultadoDiv.style.backgroundColor = "rgba(0,255,0,0.2)";
+    resultadoDiv.style.color = "green";
+  }
+
+  resultadoDiv.style.padding = "10px";
+  resultadoDiv.style.fontWeight = "bold";
+  resultadoDiv.style.borderRadius = "8px";
+}
+
+
+function limpiar() {
+  // IDs de los inputs
+  let ids = ["ptsbrazos", "ptsabd", "ptoscarrera","edad", "genero","selectbrazos", "selectabd", "tiempo"];
+
+  // Recorremos cada input y lo reseteamos
+  ids.forEach(id => {
+    let input = document.getElementById(id);
+    input.value = "";                        // limpiar valor
+    input.style.backgroundColor = "white";   // resetear color
+  });
+
+  // Limpiar resultado
+  let resultadoDiv = document.getElementById("resultado");
+  resultadoDiv.innerText = "";
+  resultadoDiv.style.backgroundColor = "transparent";
+  resultadoDiv.style.color = "black";
+}
+
